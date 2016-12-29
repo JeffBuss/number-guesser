@@ -11,7 +11,7 @@ export default class App extends Component {
       max: 100,
       lastGuess: '',
       randomNumber: null,
-      gameResponse: 'placeholder response',
+      gameResponse: '',
     };
   }
 
@@ -29,14 +29,27 @@ export default class App extends Component {
 
   checkGuess(guess) {
     this.setState({ lastGuess: guess });
+    if (guess > this.state.randomNumber) {
+      this.setState({ gameResponse: 'too high' });
+    } else if (guess < this.state.randomNumber) {
+      this.setState({ gameResponse: 'too low' });
+    } else {
+      this.setState({ gameResponse: 'you won!' });
+    }
+  }
+
+  resetGame() {
+    this.setState({ lastGuess: '', gameResponse: '' });
+    this.newRandomNumber();
   }
 
   render() {
     return (
       <div className = 'main-app'>
-        <header className='title'>Number Guesser Main App</header>
+        <header className='title'>Number Guesser</header>
         <UserInput
           handleSubmit={this.checkGuess.bind(this)}
+          handleReset={this.resetGame.bind(this)}
         />
         <Response
           lastGuess={this.state.lastGuess}

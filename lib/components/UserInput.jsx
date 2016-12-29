@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 
 export default class UserInput extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       userGuess: '',
     };
@@ -24,6 +24,7 @@ export default class UserInput extends Component {
 
   handleReset(e) {
     e.preventDefault();
+    this.props.handleReset();
     console.log('Reset');
   }
 
