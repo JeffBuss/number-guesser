@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Response = () => {
+const Response = ({ lastGuess, gameResponse }) => {
   return (
-    <div className='response-field'></div>
+    <div className='response-field'>
+      <p>Your last guess was</p>
+      <span>{lastGuess}</span>
+      <p>{gameResponse}</p>
+    </div>
   );
 };
 
