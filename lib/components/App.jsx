@@ -21,8 +21,7 @@ export default class App extends Component {
 
   newRandomNumber() {
     this.setState({
-      randomNumber: Math.floor(Math.random() *
-      (this.state.max - this.state.min + 1)) + this.state.min
+      randomNumber: Math.floor(Math.random() * (+this.state.max - +this.state.min + 1)) + +this.state.min
     });
   }
 
@@ -64,6 +63,8 @@ export default class App extends Component {
           handleSubmit={this.checkGuess.bind(this)}
           handleReset={this.resetGame.bind(this)}
           handleRange={this.handleRange.bind(this)}
+          min={this.state.min}
+          max={this.state.max}
         />
         <Response
           lastGuess={this.state.lastGuess}

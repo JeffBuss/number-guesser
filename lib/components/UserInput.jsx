@@ -15,7 +15,7 @@ export default class UserInput extends Component {
     e.preventDefault();
     this.props.handleSubmit(this.state.userGuess);
     this.setState({ userGuess: '' });
-    console.log('Submit');
+    console.log(this.state.min);
   }
 
   handleClear(e) {
