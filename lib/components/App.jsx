@@ -19,11 +19,6 @@ export default class App extends Component {
     this.newRandomNumber();
   }
 
-  newRandomNumber() {
-    this.setState({
-      randomNumber: Math.floor(Math.random() * (+this.state.max - +this.state.min + 1)) + +this.state.min
-    });
-  }
 
   checkGuess(guess) {
     this.setState({ lastGuess: guess });
@@ -35,11 +30,22 @@ export default class App extends Component {
         this.setState({ gameResponse: 'higher' });
       } else {
         this.setState({ gameResponse: 'winner', lastGuess: '' });
+        this.increaseDifficulty();
         this.newRandomNumber();
       }
     } else {
       this.setState({ gameResponse: 'invalid' });
     }
+  }
+
+  increaseDifficulty() {
+    this.setState({ min: +this.state.min-10, max: +this.state.max+10, })
+  }
+
+  newRandomNumber() {
+    this.setState({
+      randomNumber: Math.floor(Math.random() * (+this.state.max - +this.state.min + 1)) + +this.state.min
+    });
   }
 
   checkValidGuess(guess) {

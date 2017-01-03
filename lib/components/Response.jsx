@@ -19,7 +19,7 @@ export const Response = ({ lastGuess, gameResponse, min, max }) => {
       break;
 
     case 'winner':
-      feedback = 'You Won!';
+      feedback = 'You Won! The range has now increased, good luck fam';
       break;
 
     case 'invalid':
