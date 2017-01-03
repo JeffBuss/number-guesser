@@ -23,7 +23,7 @@ export const Response = ({ lastGuess, gameResponse, min, max }) => {
       break;
 
     case 'invalid':
-      feedback = 'Please guess a number between 1 and 100';
+      feedback = 'Please guess a number between';
       break;
 
     default:

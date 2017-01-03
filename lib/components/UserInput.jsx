@@ -53,23 +53,18 @@ export default class UserInput extends Component {
         <button
           className='guess-button'
           onClick={this.handleSubmit.bind(this)}
-        >
-        Guess
-        </button>
+        >Guess</button>
 
         <button
           className='clear-button'
+          name='Clear'
           onClick={this.handleClear.bind(this)}
-        >
-        Clear
-        </button>
+        >Clear</button>
 
         <button
           className='reset-button'
           onClick={this.handleReset.bind(this)}
-        >
-        Reset Game
-        </button>
+        >Reset Game</button>
 
         <div className='range-section'>
           <p> Range: {this.props.min} - {this.props.max}</p>
@@ -93,8 +88,7 @@ export default class UserInput extends Component {
           <button
             className='range-button'
             onClick ={this.handleRange.bind(this)}
-          >Set New Range
-          </button>
+          >Set New Range</button>
         </div>
 
       </div>
