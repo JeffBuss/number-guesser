@@ -11,7 +11,7 @@ export default class App extends Component {
       max: 100,
       lastGuess: '',
       randomNumber: null,
-      gameResponse: 'placeholder response',
+      gameResponse: 'pageload',
     };
   }
 
@@ -29,6 +29,23 @@ export default class App extends Component {
 
   checkGuess(guess) {
     this.setState({ lastGuess: guess });
+
+    if (this.checkValidGuess(guess)) {
+      if (guess > this.state.randomNumber) {
+        this.setState({ gameResponse: 'lower' });
+      } else if (guess < this.state.randomNumber) {
+        this.setState({ gameResponse: 'higher' });
+      } else {
+        this.setState({ gameResponse: 'winner', lastGuess: '' });
+        this.newRandomNumber();
+      }
+    } else {
+      this.setState({ gameResponse: 'invalid' })
+    }
+  }
+
+  checkValidGuess(guess) {
+    return (guess < this.state.max && guess > this.state.min);
   }
 
   render() {
@@ -41,6 +58,8 @@ export default class App extends Component {
         <Response
           lastGuess={this.state.lastGuess}
           gameResponse={this.state.gameResponse}
+          min={this.state.min}
+          max={this.state.max}
         />
       </div>
     );
