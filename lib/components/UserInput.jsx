@@ -6,6 +6,8 @@ export default class UserInput extends Component {
     super(props);
     this.state = {
       userGuess: '',
+      min: '',
+      max: '',
     };
   }
 
@@ -28,6 +30,12 @@ export default class UserInput extends Component {
     console.log('Reset');
   }
 
+  handleRange(e) {
+    e.preventDefault();
+    this.props.handleRange(this.state.min, this.state.max);
+    console.log('Range');
+  }
+
   render() {
     return (
       <div className='user-input'>
@@ -36,9 +44,9 @@ export default class UserInput extends Component {
           className='guess-input'
           type='number'
           placeholder='Make a guess'
+          value={this.state.userGuess}
           min={this.props.min}
           max={this.props.max}
-          value={this.state.userGuess}
           onChange={(e) => this.setState({ userGuess: e.target.value })}
         />
 
@@ -62,6 +70,32 @@ export default class UserInput extends Component {
         >
         Reset Game
         </button>
+
+        <div className='range-section'>
+          <p> Range: {this.props.min} - {this.props.max}</p>
+
+          <input
+            className='min-input'
+            type='number'
+            placeholder='Min'
+            value={this.state.min}
+            onChange={(e) => this.setState({ min: e.target.value })}
+          />
+
+          <input
+            className='max-input'
+            type='number'
+            placeholder='Max'
+            value={this.state.max}
+            onChange={(e) => this.setState({ max: e.target.value })}
+          />
+
+          <button
+            className='range-button'
+            onClick ={this.handleRange.bind(this)}
+          >Set New Range
+          </button>
+        </div>
 
       </div>
     );

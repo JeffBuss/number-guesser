@@ -47,9 +47,13 @@ export default class App extends Component {
     return (guess < this.state.max && guess > this.state.min);
   }
 
+  handleRange(min, max) {
+    this.setState({ min: min, max: max, gameResponse: 'pageload' }, () => {this.resetGame() })
+  }
+
   resetGame() {
-    this.setState({ lastGuess: '', gameResponse: 'pageload' });
     this.newRandomNumber();
+    this.setState({ lastGuess: '', gameResponse: 'pageload' });
   }
 
   render() {
@@ -59,6 +63,7 @@ export default class App extends Component {
         <UserInput
           handleSubmit={this.checkGuess.bind(this)}
           handleReset={this.resetGame.bind(this)}
+          handleRange={this.handleRange.bind(this)}
         />
         <Response
           lastGuess={this.state.lastGuess}

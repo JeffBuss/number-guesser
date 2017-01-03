@@ -27,7 +27,7 @@ export const Response = ({ lastGuess, gameResponse, min, max }) => {
       break;
 
     default:
-    feedback = '';
+      feedback = '';
   }
 
   let lastGuessResponse;
