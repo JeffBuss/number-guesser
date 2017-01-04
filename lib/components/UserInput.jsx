@@ -108,7 +108,6 @@ export default class UserInput extends Component {
             onClick ={this.handleRange.bind(this)}
           >Set New Range</button>
         </div>
-
       </div>
     );
   }
