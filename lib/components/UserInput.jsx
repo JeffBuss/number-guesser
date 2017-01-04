@@ -15,32 +15,27 @@ export default class UserInput extends Component {
   handleChange(e) {
     this.setState({ userGuess: e.target.value });
     this.handleDisable(e);
-    console.log(this.state.userGuess);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.handleSubmit(this.state.userGuess);
     this.setState({ userGuess: '' });
-    console.log(this.state.min);
   }
 
   handleClear(e) {
     e.preventDefault();
     this.setState({ userGuess: '' });
-    console.log('Clear');
   }
 
   handleReset(e) {
     e.preventDefault();
     this.props.handleReset();
-    console.log('Reset');
   }
 
   handleRange(e) {
     e.preventDefault();
     this.props.handleRange(this.state.min, this.state.max);
-    console.log('Range');
   }
 
   handleDisable() {
@@ -61,8 +56,6 @@ export default class UserInput extends Component {
           type='number'
           placeholder='Make a guess'
           value={userGuess}
-          min={this.props.min}
-          max={this.props.max}
           onChange={this.handleChange.bind(this)}
         />
 
