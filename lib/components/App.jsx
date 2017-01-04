@@ -19,7 +19,6 @@ export default class App extends Component {
     this.newRandomNumber();
   }
 
-
   checkGuess(guess) {
     this.setState({ lastGuess: guess });
 

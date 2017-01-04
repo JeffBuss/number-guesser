@@ -8,7 +8,14 @@ export default class UserInput extends Component {
       userGuess: '',
       min: '',
       max: '',
+      disabled: true,
     };
+  }
+
+  handleChange(e) {
+    this.setState({ userGuess: e.target.value });
+    this.handleDisable(e);
+    console.log(this.state.userGuess);
   }
 
   handleSubmit(e) {
@@ -36,7 +43,16 @@ export default class UserInput extends Component {
     console.log('Range');
   }
 
+  handleDisable() {
+    if (this.state.userGuess = '') {
+      this.setState({ disabled: true });
+    } else {
+      this.setState({ disabled: false });
+    }
+  }
+
   render() {
+    const { disabled, userGuess, min, max } = this.state;
     return (
       <div className='user-input'>
 
@@ -44,25 +60,27 @@ export default class UserInput extends Component {
           className='guess-input'
           type='number'
           placeholder='Make a guess'
-          value={this.state.userGuess}
+          value={userGuess}
           min={this.props.min}
           max={this.props.max}
-          onChange={(e) => this.setState({ userGuess: e.target.value })}
+          onChange={this.handleChange.bind(this)}
         />
 
         <button
           className='guess-button'
+          disabled={disabled}
           onClick={this.handleSubmit.bind(this)}
         >Guess</button>
 
         <button
           className='clear-button'
-          name='Clear'
+          disabled={disabled}
           onClick={this.handleClear.bind(this)}
         >Clear</button>
 
         <button
           className='reset-button'
+          disabled={disabled}
           onClick={this.handleReset.bind(this)}
         >Reset Game</button>
 
@@ -73,7 +91,7 @@ export default class UserInput extends Component {
             className='min-input'
             type='number'
             placeholder='Min'
-            value={this.state.min}
+            value={min}
             onChange={(e) => this.setState({ min: e.target.value })}
           />
 
@@ -81,7 +99,7 @@ export default class UserInput extends Component {
             className='max-input'
             type='number'
             placeholder='Max'
-            value={this.state.max}
+            value={max}
             onChange={(e) => this.setState({ max: e.target.value })}
           />
 
