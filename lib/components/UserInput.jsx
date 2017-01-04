@@ -29,8 +29,9 @@ export default class UserInput extends Component {
 
   handleReset(e) {
     e.preventDefault();
-    this.props.handleReset();
     this.setState({ min: 1, max: 100 });
+    this.props.handleReset();
+    this.props.handleRange(this.state.min, this.state.max);
   }
 
   handleRange(e) {
