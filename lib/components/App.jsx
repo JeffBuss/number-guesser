@@ -23,9 +23,9 @@ export default class App extends Component {
     this.setState({ lastGuess: guess });
 
     if (this.checkValidGuess(guess)) {
-      if (guess > this.state.randomNumber) {
+      if (guess > +this.state.randomNumber) {
         this.setState({ gameResponse: 'lower' });
-      } else if (guess < this.state.randomNumber) {
+      } else if (guess < +this.state.randomNumber) {
         this.setState({ gameResponse: 'higher' });
       } else {
         this.setState({ gameResponse: 'winner', lastGuess: '' });
@@ -48,11 +48,15 @@ export default class App extends Component {
   }
 
   checkValidGuess(guess) {
-    return (guess < this.state.max && guess > this.state.min);
+    return (guess < +this.state.max && guess > +this.state.min);
   }
 
   handleRange(min, max) {
     this.setState({ min: min, max: max, gameResponse: 'pageload' }, () => {this.resetGame() })
+  }
+
+  enableResetBtn() {
+    return this.state.gameResponse !== 'pageload' ? 0 : 1;
   }
 
   resetGame() {
@@ -68,6 +72,8 @@ export default class App extends Component {
           handleSubmit={this.checkGuess.bind(this)}
           handleReset={this.resetGame.bind(this)}
           handleRange={this.handleRange.bind(this)}
+          enableResetBtn={this.enableResetBtn.bind(this)}
+          randomNumber={this.state.randomNumber}
           min={this.state.min}
           max={this.state.max}
         />
