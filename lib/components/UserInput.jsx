@@ -8,51 +8,43 @@ export default class UserInput extends Component {
       userGuess: '',
       min: '',
       max: '',
-      disabled: true,
+      randomNumber: '',
     };
   }
 
   handleChange(e) {
     this.setState({ userGuess: e.target.value });
-    this.handleDisable(e);
-    console.log(this.state.userGuess);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     this.props.handleSubmit(this.state.userGuess);
     this.setState({ userGuess: '' });
-    console.log(this.state.min);
   }
 
   handleClear(e) {
     e.preventDefault();
     this.setState({ userGuess: '' });
-    console.log('Clear');
   }
 
   handleReset(e) {
     e.preventDefault();
     this.props.handleReset();
-    console.log('Reset');
+    this.setState({ min: 1, max: 100 });
   }
 
   handleRange(e) {
     e.preventDefault();
     this.props.handleRange(this.state.min, this.state.max);
-    console.log('Range');
+    this.setState({ min: '', max: '' });
   }
 
-  handleDisable() {
-    if (this.state.userGuess = '') {
-      this.setState({ disabled: true });
-    } else {
-      this.setState({ disabled: false });
-    }
+  enableClearGuessBtn() {
+    return this.state.userGuess.length > 0 ? 0 : 1;
   }
 
   render() {
-    const { disabled, userGuess, min, max } = this.state;
+    const { userGuess, min, max } = this.state;
     return (
       <div className='user-input'>
 
@@ -61,26 +53,24 @@ export default class UserInput extends Component {
           type='number'
           placeholder='Make a guess'
           value={userGuess}
-          min={this.props.min}
-          max={this.props.max}
           onChange={this.handleChange.bind(this)}
         />
 
         <button
           className='guess-button'
-          disabled={disabled}
+          disabled={this.enableClearGuessBtn()}
           onClick={this.handleSubmit.bind(this)}
         >Guess</button>
 
         <button
           className='clear-button'
-          disabled={disabled}
+          disabled={this.enableClearGuessBtn()}
           onClick={this.handleClear.bind(this)}
         >Clear</button>
 
         <button
           className='reset-button'
-          disabled={disabled}
+          disabled={this.props.enableResetBtn()}
           onClick={this.handleReset.bind(this)}
         >Reset Game</button>
 
